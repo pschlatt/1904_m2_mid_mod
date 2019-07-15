@@ -181,13 +181,78 @@
       "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/config/routes.rb": [
         1,
         null,
+        null,
+        1,
+        null,
         null
       ],
       "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/app/helpers/application_helper.rb": [
         1,
         null
+      ],
+      "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/app/models/author.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/spec/models/book_authors_spec.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null,
+        null
+      ],
+      "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/app/models/book_author.rb": [
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/spec/models/book_spec.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        2,
+        2,
+        2,
+        null,
+        null,
+        1,
+        2,
+        2,
+        null,
+        null,
+        null
+      ],
+      "/Users/paul/turing/mod2/dailywork/challenges/1904_m2_mid_mod/app/models/book.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
       ]
     },
-    "timestamp": 1563146908
+    "timestamp": 1563149009
   }
 }

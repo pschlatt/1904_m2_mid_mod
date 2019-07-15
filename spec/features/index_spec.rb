@@ -1,6 +1,6 @@
 require "rails_helper.rb"
 
-RSpec.describe "Book Index", type: :model do
+RSpec.describe "Book Index", type: :feature do
   before :each do
     @book1 = Book.create!(title: "The Great Gatsby", number_of_pages: 148, publication_year: 1925)
     @book2 = Book.create!(title: "Brave New World", number_of_pages: 311, publication_year: 1932)
@@ -14,16 +14,58 @@ RSpec.describe "Book Index", type: :model do
     @book2.authors << @author2
     @book3.authors << @author2
     @book4.authors << @author3
-
-
   end
 
-end
+    it "will show book1" do
 
-# As a user,
-# When I visit '/books'
-# Then I see each book in the system including the book's:
-#   - title
-#   - number of pages
-#   - publication year
-#   - the name of each author that wrote the book
+      visit books_path
+
+      within "#book-id-#{@book1.id}" do
+        expect(page).to have_content("Title: The Great Gatsby")
+        expect(page).to have_content("Pages: 148")
+        expect(page).to have_content("Publication Year: 1925")
+        expect(page).to have_content("Author(s): #{@author1.name}")
+      end
+
+    end
+
+    it "will show book2" do
+
+      visit books_path
+
+      within "#book-id-#{@book2.id}" do
+        expect(page).to have_content(@book2.title)
+        expect(page).to have_content(@book2.number_of_pages)
+        expect(page).to have_content(@book2.publication_year)
+        expect(page).to have_content("Author(s): #{@author2.name}")
+      end
+
+    end
+
+    it "will show book3" do
+
+      visit books_path
+
+      within "#book-id-#{@book3.id}" do
+        expect(page).to have_content(@book3.title)
+        expect(page).to have_content(@book3.number_of_pages)
+        expect(page).to have_content(@book3.publication_year)
+        expect(page).to have_content("Author(s): #{@author2.name}")
+      end
+
+    end
+
+    it "will show book4" do
+
+      visit books_path
+
+      within "#book-id-#{@book4.id}" do
+        expect(page).to have_content(@book4.title)
+        expect(page).to have_content(@book4.number_of_pages)
+        expect(page).to have_content(@book4.publication_year)
+        expect(page).to have_content("Author(s): #{@author3.name}")
+      end
+
+    end
+
+end
