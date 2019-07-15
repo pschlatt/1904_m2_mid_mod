@@ -36,3 +36,308 @@ FOREIGN KEY ("author_id")
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4985243227066561305)[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (194.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mid_mod_development"[0m
+  [1m[35m (208.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mid_mod_test"[0m
+  [1m[35m (528.3ms)[0m  [1m[35mCREATE DATABASE "mid_mod_development" ENCODING = 'unicode'[0m
+  [1m[35m (387.2ms)[0m  [1m[35mCREATE DATABASE "mid_mod_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4985243227066561305)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAuthors (20190714224915)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.9ms)[0m  [1m[35mCREATE TABLE "authors" ("id" bigserial primary key, "name" character varying)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190714224915"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBooks (20190714225009)
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "books" ("id" bigserial primary key, "title" character varying, "number_of_pages" integer, "publication_year" integer)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190714225009"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBookAuthors (20190714225059)
+  [1m[35m (40.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE "book_authors" ("id" bigserial primary key, "book_id" bigint, "author_id" bigint, CONSTRAINT "fk_rails_b23f3934c1"
+FOREIGN KEY ("book_id")
+  REFERENCES "books" ("id")
+, CONSTRAINT "fk_rails_0c0759568d"
+FOREIGN KEY ("author_id")
+  REFERENCES "authors" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_book_authors_on_book_id" ON "book_authors"  ("book_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_book_authors_on_author_id" ON "book_authors"  ("author_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190714225059"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-07-15 01:08:59.832065"], ["updated_at", "2019-07-15 01:08:59.832065"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4985243227066561305)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "books" ("title", "number_of_pages", "publication_year") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "The Great Gatsby"], ["number_of_pages", 148], ["publication_year", 1925]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "number_of_pages", "publication_year") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Brave New World"], ["number_of_pages", 311], ["publication_year", 1932]]
+  [1m[35m (41.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "books" ("title", "number_of_pages", "publication_year") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Eyeless In Gaza"], ["number_of_pages", 619], ["publication_year", 1936]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "number_of_pages", "publication_year") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "The Catcher In The Rye"], ["number_of_pages", 277], ["publication_year", 1951]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "authors" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "F. Scott Fitzgerald"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "authors" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "Aldous Huxley"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "J.D. Salinger"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 1], ["author_id", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 2], ["author_id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 3], ["author_id", 2]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "book_authors" ("book_id", "author_id") VALUES ($1, $2) RETURNING "id"[0m  [["book_id", 4], ["author_id", 3]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2019-07-14 19:09:08 -0600
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/paul/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/railties-5.1.7/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/paul/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/railties-5.1.7/lib/rails/templates/rails/welcome/index.html.erb (2.6ms)
+Completed 200 OK in 10ms (Views: 6.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/books" for ::1 at 2019-07-14 19:09:12 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (2.2ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 2]]
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 3]]
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 4]]
+  Rendered books/index.html.erb within layouts/application (69.4ms)
+Completed 200 OK in 244ms (Views: 216.7ms | ActiveRecord: 18.8ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:09:17 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 22ms (Views: 17.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/authors/1" for ::1 at 2019-07-14 19:09:22 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.7ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  Rendered authors/show.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 21ms (Views: 15.2ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/authors/3" for ::1 at 2019-07-14 19:09:25 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 3]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 3]]
+  Rendered authors/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 20ms (Views: 15.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/authors/1" for ::1 at 2019-07-14 19:09:33 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  Rendered authors/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 31ms (Views: 27.4ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for ::1 at 2019-07-14 19:13:42 -0600
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/paul/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/railties-5.1.7/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/paul/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/railties-5.1.7/lib/rails/templates/rails/welcome/index.html.erb (3.2ms)
+Completed 200 OK in 12ms (Views: 9.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/books" for ::1 at 2019-07-14 19:13:45 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (1.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 2]]
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 3]]
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 4]]
+  Rendered books/index.html.erb within layouts/application (71.0ms)
+Completed 200 OK in 252ms (Views: 225.2ms | ActiveRecord: 18.9ms)
+
+
+Started GET "/books" for ::1 at 2019-07-14 19:13:52 -0600
+Processing by BooksController#index as HTML
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 1]]
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 2]]
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 3]]
+  [1m[36mAuthor Load (0.8ms)[0m  [1m[34mSELECT "authors".* FROM "authors" INNER JOIN "book_authors" ON "authors"."id" = "book_authors"."author_id" WHERE "book_authors"."book_id" = $1[0m  [["book_id", 4]]
+  Rendered books/index.html.erb within layouts/application (26.6ms)
+Completed 200 OK in 50ms (Views: 44.8ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/authors/1" for ::1 at 2019-07-14 19:14:25 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.7ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  Rendered authors/show.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 24ms (Views: 16.7ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:14:32 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 23ms (Views: 17.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/authors/3" for ::1 at 2019-07-14 19:14:44 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 3]]
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 3]]
+  Rendered authors/show.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 19ms (Views: 15.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:14:47 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 24ms (Views: 19.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:15:46 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 22ms (Views: 17.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:16:20 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 19ms (Views: 15.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:16:45 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 18ms (Views: 14.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/authors/1" for ::1 at 2019-07-14 19:16:55 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 1]]
+  Rendered authors/show.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 22ms (Views: 17.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/authors/3" for ::1 at 2019-07-14 19:17:02 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAuthor Load (0.5ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 3]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 3]]
+  Rendered authors/show.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 20ms (Views: 15.4ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:17:07 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 19ms (Views: 15.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:17:21 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 19ms (Views: 14.8ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/authors/2" for ::1 at 2019-07-14 19:18:57 -0600
+Processing by AuthorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering authors/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT AVG("books"."number_of_pages") FROM "books" INNER JOIN "book_authors" ON "books"."id" = "book_authors"."book_id" WHERE "book_authors"."author_id" = $1[0m  [["author_id", 2]]
+  Rendered authors/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 18ms (Views: 14.3ms | ActiveRecord: 1.0ms)
+
+
