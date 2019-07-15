@@ -1,4 +1,4 @@
-# BEM2 Mid Mod
+# Paul Schlattmann - Backend Module 2 - Mid Module Assesment
 
 You are going to build an application that will store information on Books and Authors. The relationship between Books and Authors is many-to-many. An Author can write many Books, and a Book can be written by many Authors
 
